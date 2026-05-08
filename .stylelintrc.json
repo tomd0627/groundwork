@@ -1,0 +1,11 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "no-duplicate-selectors": true,
+    "property-no-vendor-prefix": [true, { "ignoreProperties": ["text-size-adjust"] }],
+    "value-no-vendor-prefix": true,
+    "selector-class-pattern": "^[a-z][a-z0-9-]*(__[a-z][a-z0-9-]*)?(--[a-z][a-z0-9-]*)?$",
+    "media-feature-range-notation": null
+  }
+}
