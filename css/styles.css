@@ -14,7 +14,7 @@
   /* Text */
   --text-primary: #1c1a17;
   --text-secondary: #5a5750;
-  --text-muted: #9a9690;
+  --text-muted: #636160;
 
   /* Accent (interactive) */
   --accent: #2d6a4f;
@@ -184,6 +184,11 @@ a:hover {
 
 .wordmark:hover {
   color: var(--accent);
+}
+
+.wordmark-name {
+  font: inherit;
+  margin: 0;
 }
 
 .wordmark-icon {

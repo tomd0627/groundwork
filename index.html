@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Groundwork — HTML Audit Tool</title>
+    <meta
+      name="description"
+      content="Scan a URL or paste raw HTML to check for structural, accessibility, and performance issues before deploy."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="/" class="wordmark" aria-label="Groundwork home">
+          <svg class="wordmark-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="2" rx="1" fill="currentColor" />
+            <rect x="3" y="10" width="14" height="2" rx="1" fill="currentColor" opacity="0.6" />
+            <rect x="3" y="15" width="9" height="2" rx="1" fill="currentColor" opacity="0.3" />
+            <circle cx="19" cy="17" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path
+              d="M17 17l1.5 1.5L21 15.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <h1 class="wordmark-name">Groundwork</h1>
+        </a>
+        <p class="header-tagline">HTML audit before you ship</p>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="input-section" aria-label="Audit input">
+        <div class="input-card">
+          <div class="tab-bar" role="tablist" aria-label="Input mode">
+            <button
+              class="tab-btn tab-btn--active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-url"
+              id="tab-url"
+              data-tab="url"
+            >
+              URL
+            </button>
+            <button
+              class="tab-btn"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-paste"
+              id="tab-paste"
+              data-tab="paste"
+            >
+              Paste HTML
+            </button>
+          </div>
+
+          <div
+            id="panel-url"
+            role="tabpanel"
+            aria-labelledby="tab-url"
+            class="tab-panel tab-panel--active"
+          >
+            <form id="form-url" novalidate>
+              <label class="field-label" for="input-url">Page URL</label>
+              <div class="input-row">
+                <input
+                  id="input-url"
+                  name="url"
+                  type="url"
+                  class="text-input"
+                  placeholder="https://example.com"
+                  autocomplete="url"
+                  spellcheck="false"
+                />
+                <button type="submit" class="btn-primary">Audit</button>
+              </div>
+              <p class="field-hint">Fetched via a server proxy to handle CORS. Timeout: 10s.</p>
+              <div id="url-error" class="field-error" role="alert" aria-live="polite" hidden></div>
+            </form>
+          </div>
+
+          <div
+            id="panel-paste"
+            role="tabpanel"
+            aria-labelledby="tab-paste"
+            class="tab-panel"
+            hidden
+          >
+            <form id="form-paste" novalidate>
+              <label class="field-label" for="input-paste">Raw HTML</label>
+              <textarea
+                id="input-paste"
+                name="html"
+                class="text-input textarea"
+                placeholder='<!doctype html>&#10;<html lang="en">&#10;  ...'
+                rows="8"
+                spellcheck="false"
+                autocorrect="off"
+                autocapitalize="off"
+              ></textarea>
+              <div class="input-row input-row--right">
+                <button type="submit" class="btn-primary">Audit</button>
+              </div>
+              <div
+                id="paste-error"
+                class="field-error"
+                role="alert"
+                aria-live="polite"
+                hidden
+              ></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="results-section" class="results-section" aria-label="Audit results" hidden>
+        <div class="results-header">
+          <div class="score-block">
+            <div class="score-ring-wrap" aria-hidden="true">
+              <svg class="score-ring" viewBox="0 0 80 80">
+                <circle
+                  class="score-ring__track"
+                  cx="40"
+                  cy="40"
+                  r="34"
+                  fill="none"
+                  stroke-width="7"
+                />
+                <circle
+                  class="score-ring__fill"
+                  cx="40"
+                  cy="40"
+                  r="34"
+                  fill="none"
+                  stroke-width="7"
+                  stroke-linecap="round"
+                  transform="rotate(-90 40 40)"
+                />
+              </svg>
+              <span class="score-number" id="score-number">—</span>
+            </div>
+            <div class="score-meta">
+              <span class="score-grade" id="score-grade"></span>
+              <span class="score-label" id="score-label"></span>
+            </div>
+          </div>
+
+          <div class="results-summary">
+            <div class="summary-pill summary-pill--fail">
+              <span class="summary-count" id="count-fail">0</span>
+              <span class="summary-text">Failed</span>
+            </div>
+            <div class="summary-pill summary-pill--warn">
+              <span class="summary-count" id="count-warn">0</span>
+              <span class="summary-text">Warnings</span>
+            </div>
+            <div class="summary-pill summary-pill--pass">
+              <span class="summary-count" id="count-pass">0</span>
+              <span class="summary-text">Passed</span>
+            </div>
+          </div>
+
+          <div class="results-meta">
+            <p class="audited-url" id="audited-url"></p>
+            <button class="btn-ghost" id="btn-reset" type="button">New audit</button>
+          </div>
+        </div>
+
+        <div class="results-body" id="results-body" role="list"></div>
+      </section>
+
+      <div id="loading-state" class="loading-state" aria-live="polite" aria-label="Loading" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <p class="loading-text">Fetching and analyzing…</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Groundwork &mdash; pre-deploy HTML hygiene</p>
+    </footer>
+
+    <script src="/js/audits.js" defer></script>
+    <script src="/js/app.js" defer></script>
+  </body>
+</html>
