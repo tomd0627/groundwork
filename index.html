@@ -53,11 +53,12 @@
       </div>
     </header>
 
-    <main id="main">
+    <main id="main" tabindex="-1">
       <section class="input-section" aria-label="Audit input">
         <div class="input-card">
           <div class="tab-bar" role="tablist" aria-label="Input mode">
             <button
+              type="button"
               class="tab-btn tab-btn--active"
               role="tab"
               aria-selected="true"
@@ -68,6 +69,7 @@
               URL
             </button>
             <button
+              type="button"
               class="tab-btn"
               role="tab"
               aria-selected="false"
@@ -97,7 +99,7 @@
                   autocomplete="url"
                   spellcheck="false"
                 />
-                <button type="submit" class="btn-primary">Audit</button>
+                <button type="submit" class="btn-primary" aria-label="Audit URL">Audit</button>
               </div>
               <p class="field-hint">Fetched via a server proxy to handle CORS. Timeout: 10s.</p>
               <div id="url-error" class="field-error" role="alert" aria-live="polite" hidden></div>
@@ -124,7 +126,7 @@
                 autocapitalize="off"
               ></textarea>
               <div class="input-row input-row--right">
-                <button type="submit" class="btn-primary">Audit</button>
+                <button type="submit" class="btn-primary" aria-label="Audit HTML">Audit</button>
               </div>
               <div
                 id="paste-error"
@@ -138,11 +140,18 @@
         </div>
       </section>
 
-      <section id="results-section" class="results-section" aria-label="Audit results" hidden>
+      <section
+        id="results-section"
+        class="results-section"
+        aria-label="Audit results"
+        tabindex="-1"
+        hidden
+      >
         <div class="results-header">
           <div class="score-block">
-            <div class="score-ring-wrap" aria-hidden="true">
-              <svg class="score-ring" viewBox="0 0 80 80">
+            <div class="score-ring-wrap">
+              <svg class="score-ring" viewBox="0 0 80 80" aria-hidden="true">
+                <title>Score ring</title>
                 <circle
                   class="score-ring__track"
                   cx="40"
@@ -191,7 +200,7 @@
           </div>
         </div>
 
-        <div class="results-body" id="results-body" role="list"></div>
+        <div class="results-body" id="results-body"></div>
       </section>
 
       <div id="loading-state" class="loading-state" aria-live="polite" aria-label="Loading" hidden>

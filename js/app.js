@@ -1,8 +1,6 @@
 /* global runAudits */
 
-(function () {
-  'use strict';
-
+(() => {
   /* ── DOM refs ──────────────────────────────────────────── */
   const tabBtns = document.querySelectorAll('.tab-btn');
   const panelUrl = document.getElementById('panel-url');
