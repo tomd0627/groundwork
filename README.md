@@ -2,34 +2,32 @@
 
 A lightweight HTML audit tool that checks a page for structural, accessibility, and performance hygiene issues before deploy. Paste raw HTML or provide a URL — results appear in seconds with a score, grade, and per-check detail.
 
-**Live demo:** [groundwork.netlify.app](https://groundwork.netlify.app)
-
 ---
 
 ## What it checks
 
 18 checks across 7 categories, weighted by severity:
 
-| Category | Check | Severity |
-|---|---|---|
-| Document | `html[lang]` present | fail |
-| Document | Character encoding declared | fail |
-| Document | Viewport meta present | fail |
-| Document | Page has a `<title>` | warn |
-| Images | All images have `alt` attributes | fail |
-| Images | Images have explicit `width`/`height` | warn |
-| Images | Modern image formats (WebP/AVIF) | warn |
-| Scripts | No render-blocking scripts in `<head>` | warn |
-| Fonts | `font-display` used in `@font-face` | warn |
-| Fonts | Preconnect hints for external fonts | warn |
-| Structure | Page has a `<main>` landmark | fail |
-| Structure | Page has a `<nav>` landmark | warn |
-| Structure | Exactly one `<h1>` | warn |
-| Structure | Heading levels don't skip | warn |
-| Forms | All inputs have labels | fail |
-| Deprecated | No deprecated HTML elements | fail |
-| Links | All links have accessible text | fail |
-| Links | No bare `href="#"` buttons | warn |
+| Category   | Check                                  | Severity |
+| ---------- | -------------------------------------- | -------- |
+| Document   | `html[lang]` present                   | fail     |
+| Document   | Character encoding declared            | fail     |
+| Document   | Viewport meta present                  | fail     |
+| Document   | Page has a `<title>`                   | warn     |
+| Images     | All images have `alt` attributes       | fail     |
+| Images     | Images have explicit `width`/`height`  | warn     |
+| Images     | Modern image formats (WebP/AVIF)       | warn     |
+| Scripts    | No render-blocking scripts in `<head>` | warn     |
+| Fonts      | `font-display` used in `@font-face`    | warn     |
+| Fonts      | Preconnect hints for external fonts    | warn     |
+| Structure  | Page has a `<main>` landmark           | fail     |
+| Structure  | Page has a `<nav>` landmark            | warn     |
+| Structure  | Exactly one `<h1>`                     | warn     |
+| Structure  | Heading levels don't skip              | warn     |
+| Forms      | All inputs have labels                 | fail     |
+| Deprecated | No deprecated HTML elements            | fail     |
+| Links      | All links have accessible text         | fail     |
+| Links      | No bare `href="#"` buttons             | warn     |
 
 **Scoring:** 8 fail-severity checks × 10 pts + 10 warn-severity checks × 5 pts = 130 max.  
 `score = clamp(100 − (penalty / 130 × 100), 0, 100)`  
@@ -43,12 +41,12 @@ Running Groundwork against its own `index.html` — 17 pass, 1 warn (no `<nav>` 
 
 Lighthouse results (local dev server):
 
-| | Score |
-|---|---|
-| Performance | 100 |
-| Accessibility | 100 |
-| Best Practices | 100 |
-| SEO | 100 |
+|                | Score |
+| -------------- | ----- |
+| Performance    | 100   |
+| Accessibility  | 100   |
+| Best Practices | 100   |
+| SEO            | 100   |
 
 Core Web Vitals: FCP 1.4 s · LCP 1.4 s · TBT 0 ms · CLS 0.007
 
@@ -107,13 +105,13 @@ npx prettier --check .
 
 Tooling:
 
-| Tool | Config |
-|---|---|
-| ESLint v9 | `eslint.config.js` (flat config) |
-| Stylelint | `.stylelintrc.json` |
-| Prettier | `.prettierrc` |
-| lint-staged | `.lintstagedrc.json` |
-| Husky | `.husky/pre-commit` |
+| Tool        | Config                           |
+| ----------- | -------------------------------- |
+| ESLint v9   | `eslint.config.js` (flat config) |
+| Stylelint   | `.stylelintrc.json`              |
+| Prettier    | `.prettierrc`                    |
+| lint-staged | `.lintstagedrc.json`             |
+| Husky       | `.husky/pre-commit`              |
 
 ---
 
