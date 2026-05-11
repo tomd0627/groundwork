@@ -85,6 +85,11 @@
   padding: 0;
 }
 
+.loading-state[hidden],
+.field-error[hidden] {
+  display: none;
+}
+
 html {
   color-scheme: light;
   font-size: 16px;
@@ -337,7 +342,9 @@ main {
 }
 
 .textarea {
+  display: block;
   font-size: 0.8125rem;
+  inline-size: 100%;
   line-height: 1.6;
   min-block-size: 160px;
   resize: vertical;

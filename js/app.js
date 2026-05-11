@@ -62,6 +62,7 @@
       renderResults(doc, raw);
     } catch (err) {
       hideLoading();
+      inputSection.hidden = false;
       showError(urlError, err.message);
     }
   });
